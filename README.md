@@ -12,7 +12,7 @@ PRINT = "printf", "(", EXPRESSION, ")" ;
 
 EXPRESSION = TERM, { ("+" | "-"), TERM } ;
 
-TERM = FACTOR, { ("**" | "/"), FACTOR } ;
+TERM = FACTOR, { ("*" | "/"), FACTOR } ;
 
 FACTOR = (("+" | "-"), FACTOR) | NUMBER | "(", EXPRESSION, ")" | IDENTIFIER ;
 
