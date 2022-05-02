@@ -4,22 +4,30 @@ EBNF:
 
 BLOCK = "{", { STATEMENT }, "}" ;
 
-STATEMENT = ( λ | ASSIGNMENT | PRINT), ";" ;
+STATEMENT = ( λ | ASSIGNMENT | PRINT | WHILE | IF | BLOCK) ;
 
-ASSIGNMENT = IDENTIFIER, "=", EXPRESSION ;
+ASSIGNMENT = IDENTIFIER, "=", EXPRESSION, ";" ;
 
-PRINT = "printf", "(", EXPRESSION, ")" ;
+PRINT = "P", "(", EXPRESSION, ")", ";" ;
 
-EXPRESSION = TERM, { ("+" | "-"), TERM } ;
+WHILE = "W", "(", REALEXPRESSION, ")". STATEMENT ;
 
-TERM = FACTOR, { ("*" | "/"), FACTOR } ;
+IF = "I", "(", REALEXPRESSION, ")". STATEMENT | "I", "(", REALEXPRESSION, ")". STATEMENT, ELSE;
 
-FACTOR = (("+" | "-"), FACTOR) | NUMBER | "(", EXPRESSION, ")" | IDENTIFIER ;
+ELSE = "E", STATEMENT;
+
+REALEXPRESSION = EXPRESSION, { ("==" | "<" | ">"), TERM } ;
+
+EXPRESSION = TERM, { ("+" | "-" | "O"), TERM } ;
+
+TERM = FACTOR, { ("*" | "/" | "A"), FACTOR } ;
+
+FACTOR = (("+" | "-" | "N"), FACTOR) | NUMBER | "(", EXPRESSION, ")" | IDENTIFIER | "S", "(", ")" ;
 
 IDENTIFIER = LETTER, { LETTER | DIGIT | "_" } ;
 
 NUMBER = DIGIT, { DIGIT } ;
 
-LETTER = ( a | ... | z | A | ... | Z ) ;
+LETTER = ( a | ... | z ) ;
 
 DIGIT = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ) ;
