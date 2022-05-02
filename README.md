@@ -2,7 +2,7 @@
 
 EBNF:
 
-BLOCK = "{", { STATEMENT }, "}" ;
+BLOCK = "{", { STATEMENT }, "}" ; \n
 STATEMENT = ( λ | ASSIGNMENT | PRINT), ";" ;
 ASSIGNMENT = IDENTIFIER, "=", EXPRESSION ;
 PRINT = "printf", "(", EXPRESSION, ")" ;
