@@ -1,6 +1,7 @@
 %{
     extern int yylex();
     void yyerror(const char *s) { printf("ERROR: %sn", s); }
+    #include<string>
 %}
 
 /* Represents the many different ways we can access our data */
@@ -27,8 +28,14 @@
 %start block
 
 %%
+statement   : state_op
+            | TSEMICOL
+            ;
 
-block   :   TLBRACE {statement} TRBRACE
+block   :   TLBRACE stmt_block TRBRACE
+        ;
+
+stmt_block : | stmt_block statement 
         ;
 
 defunc  :   TDEFINE identifier TLPAREN args TRPAREN block
@@ -37,15 +44,16 @@ defunc  :   TDEFINE identifier TLPAREN args TRPAREN block
 funcall :   identifier TLPAREN args TRPAREN 
         ;
 
-args    :   identifier {TCOMMA args} | 
+args    :   identifier args_db 
+        ;
+
+args_db :   | args_db TCOMMA args
         ;
 
 return  :   TRETURN realexpression
         ;
 
-statement   : state_op
-            | TSEMICOL
-            ;
+
 
 state_op    : assignment 
             | print 
@@ -55,6 +63,7 @@ state_op    : assignment
             | return 
             | defunc 
             | funcall 
+            |
             ;
 
 factor  : op_factor
@@ -65,34 +74,48 @@ factor  : op_factor
         ;
 
 
-op_factor   : factor | factor_mat_op
+op_factor   : factor_mat_op factor 
+            ;
 
 factor_mat_op  : TPLUS
                 | TMINUS
                 | TCNE
+                ;
 
-
-term    :   factor { term_op factor}
+term    :   factor repeat_term 
         ;
+
+repeat_term :  | repeat_term term_op factor
+            ;
+
 
 term_op :   TMUL
         |   TDIV
         |   TAND
+        ;
 
 
-expression  :   term {expression_op  term}
+expression  :   term repeat_exp
             ;
+
+repeat_exp :  | repeat_exp expression_op term 
+           ;
 
 expression_op :   TPLUS
                 | TMINUS
                 | TOR
+                ;
 
-realexpression  :   expression { realexpression_op expression}
+realexpression  :   expression repeat_real
+                ;
+
+repeat_real     :       |       repeat_exp realexpression_op expression
                 ;
 
 realexpression_op   :   TCEQ
                     |   TCLT
                     |   TCGT
+                
 
 while   :   TWHILE TLPAREN realexpression TRPAREN statement
         ;
@@ -112,11 +135,15 @@ assignment  :   identifier TEQUAL expression
 print   :   TPRINT TLPAREN expression TRPAREN
         ;
 
-identifier  :   letter {letter | digit}
+identifier  :   letter repeat_ident
             ;
 
-number  :   TDIGIT {TDIGIT}
+repeat_ident:       | repeat_ident letter digit
+            ;
+
+number  :   TDIGIT repeat_number
         ;
+repeat_number :  |  repeat_number TDIGIT
 
 letter  :   TLETTER
         ;

@@ -1,14 +1,14 @@
-/* A Bison parser, made by GNU Bison 2.3.  */
+/* A Bison parser, made by GNU Bison 3.5.1.  */
 
-/* Skeleton interface for Bison's Yacc-like parsers in C
+/* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
-   Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Inc.
 
-   This program is free software; you can redistribute it and/or modify
+   This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,9 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -33,85 +31,73 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-/* Tokens.  */
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
+
+#ifndef YY_YY_PARSER_HPP_INCLUDED
+# define YY_YY_PARSER_HPP_INCLUDED
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
+
+/* Token type.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     TLETTER = 258,
-     TDIGIT = 259,
-     TCEQ = 260,
-     TCNE = 261,
-     TCLT = 262,
-     TCGT = 263,
-     TEQUAL = 264,
-     TOR = 265,
-     TAND = 266,
-     TLPAREN = 267,
-     TRPAREN = 268,
-     TLBRACE = 269,
-     TRBRACE = 270,
-     TCOMMA = 271,
-     TSEMICOL = 272,
-     TPLUS = 273,
-     TMINUS = 274,
-     TMUL = 275,
-     TDIV = 276,
-     TIF = 277,
-     TWHILE = 278,
-     TPRINT = 279,
-     TDEFINE = 280,
-     TRETURN = 281,
-     TELSE = 282,
-     TSCAN = 283
-   };
+  enum yytokentype
+  {
+    TLETTER = 258,
+    TDIGIT = 259,
+    TCEQ = 260,
+    TCNE = 261,
+    TCLT = 262,
+    TCGT = 263,
+    TEQUAL = 264,
+    TOR = 265,
+    TAND = 266,
+    TLPAREN = 267,
+    TRPAREN = 268,
+    TLBRACE = 269,
+    TRBRACE = 270,
+    TCOMMA = 271,
+    TSEMICOL = 272,
+    TPLUS = 273,
+    TMINUS = 274,
+    TMUL = 275,
+    TDIV = 276,
+    TIF = 277,
+    TWHILE = 278,
+    TPRINT = 279,
+    TDEFINE = 280,
+    TRETURN = 281,
+    TELSE = 282,
+    TSCAN = 283
+  };
 #endif
-/* Tokens.  */
-#define TLETTER 258
-#define TDIGIT 259
-#define TCEQ 260
-#define TCNE 261
-#define TCLT 262
-#define TCGT 263
-#define TEQUAL 264
-#define TOR 265
-#define TAND 266
-#define TLPAREN 267
-#define TRPAREN 268
-#define TLBRACE 269
-#define TRBRACE 270
-#define TCOMMA 271
-#define TSEMICOL 272
-#define TPLUS 273
-#define TMINUS 274
-#define TMUL 275
-#define TDIV 276
-#define TIF 277
-#define TWHILE 278
-#define TPRINT 279
-#define TDEFINE 280
-#define TRETURN 281
-#define TELSE 282
-#define TSCAN 283
 
-
-
-
+/* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
-#line 7 "parser.y"
+union YYSTYPE
 {
+#line 8 "parser.y"
+
     std::string *string;
     int token;
-}
-/* Line 1529 of yacc.c.  */
-#line 110 "parser.hpp"
-	YYSTYPE;
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
-# define YYSTYPE_IS_DECLARED 1
+
+#line 91 "parser.hpp"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
+# define YYSTYPE_IS_DECLARED 1
 #endif
+
 
 extern YYSTYPE yylval;
 
+int yyparse (void);
+
+#endif /* !YY_YY_PARSER_HPP_INCLUDED  */
