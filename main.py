@@ -204,8 +204,15 @@ class Tokenizer:
                 self.actual = Token(candidato, "TYPE")
 
             else:
-                # print("ident: ", candidato)
-                self.actual = Token(candidato, "IDENT")
+                for char in candidato:
+                    if char.isupper():
+                        tem_caps = True
+                    else:
+                        tem_caps = False
+                if tem_caps:
+                    raise ValueError("Var is in Caps")
+                else:
+                    self.actual = Token(candidato, "IDENT")
             return self.actual
 
         else:

@@ -1,14 +1,13 @@
-IN soma(IN x, IN y, IN z)
-{
-    IN c;
-    c = x + y;
-    R(c);
-}
 IN main()
 {
     IN a;
     IN b;
     a = 3;
-    b = soma(a, 4, 9);
+    b = 10;
+    while (a < b)
+    {
+        a = a + 1;
+        P(a);
+    }
     P(b);
 }
